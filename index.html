@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 40px; 
+            line-height: 1.6;
+        }
+        .success { 
+            color: green; 
+            background: #e8f5e9; 
+            padding: 15px; 
+            border-radius: 8px; 
+            border: 1px solid green;
+        }
+        .error { 
+            color: red; 
+            background: #ffebee; 
+            padding: 15px; 
+            border-radius: 8px; 
+            border: 1px solid red;
+        }
+        input {
+            width: 100%;
+            max-width: 500px;
+            padding: 10px;
+            margin: 8px 0;
+            font-size: 16px;
+        }
+        button {
+            padding: 12px 25px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h2>Ro'yxatdan o'tish</h2>
+
+    {% if res is not none %}
+        {% if res|length == 1 and res[0] == "Ma'lumotlar noto'g'ri kiritildi" %}
+            <p class="error">❌ {{ res[0] }}</p>
+        {% else %}
+            <div class="success">
+                <h3>✅ Ro'yxatdan o'tish muvaffaqiyatli!</h3>
+                <p><strong>Foydalanuvchi nomi:</strong> {{ res[0] }}</p>
+                <p><strong>Telefon:</strong> {{ res[1] }}</p>
+                <p><strong>Yosh:</strong> {{ res[2] }}</p>
+            </div>
+        {% endif %}
+        <hr>
+    {% endif %}
+
+    <form method="POST">
+        <input type="text" name="foydalanuvchi_nomi" placeholder="Foydalanuvchi nomi" required><br><br>
+        <input type="text" name="telefon" placeholder="+998 XX XXX XX XX" required><br><br>
+        <input type="text" name="yosh" placeholder="Yoshingiz" required><br><br>
+        <button type="submit">Ro'yxatdan o'tish</button>
+    </form>
+
+    <p><a href="/kontakt">Kontakt formasiga o'tish</a></p>
+</body>
+</html>
